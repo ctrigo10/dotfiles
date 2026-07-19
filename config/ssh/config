@@ -1,0 +1,24 @@
+Host *
+    AddKeysToAgent yes
+    ServerAliveInterval 60
+
+# GitHub Personal
+Host github-personal
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_github_personal
+    IdentitiesOnly yes
+
+# GitHub PowerFinancialPr
+Host github
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_github_powerfinancial
+    IdentitiesOnly yes
+
+# GitLab Agetic
+Host gitlab
+    HostName gitlab.agetic.gob.bo
+    User git
+    IdentityFile ~/.ssh/id_ed25519_gitlab_agetic
+    IdentitiesOnly yes

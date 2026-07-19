@@ -1,0 +1,15 @@
+[user]
+    name = ctrigo
+    email = carlos.trigo.vargas@gmail.com
+
+[init]
+    defaultBranch = main
+
+[includeIf "gitdir:/home/ctrigo/Projects/agetic/"]
+    path = /home/ctrigo/.gitconfig-agetic
+
+[includeIf "gitdir:/home/ctrigo/Projects/personal/"]
+    path = /home/ctrigo/.gitconfig-personal
+
+[includeIf "gitdir:/home/ctrigo/Projects/powerfinancial/"]
+    path = /home/ctrigo/.gitconfig-powerfinancial
