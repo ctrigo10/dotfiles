@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
-echo ""
-echo "✔ Git configured"
-echo "✔ Ghostty configured"
-echo "✔ tmux configured"
-echo "✔ zsh configured"
-echo ""
-echo "Happy coding 🚀"
+echo
+echo "========================================"
+echo "Bootstrap completed!"
+echo "========================================"
+echo
+echo "Next steps:"
+echo
+echo "  source ~/.zshrc"
+echo "  ghostty"
+echo "  git --version"
+echo "  tmux -V"
+echo "  node -v"
+echo

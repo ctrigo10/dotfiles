@@ -72,3 +72,32 @@ require_sudo() {
 
     print_success "Privileges granted"
 }
+
+create_directory() {
+    mkdir -p "$1"
+}
+
+backup_file() {
+    local file="$1"
+
+    if [[ -e "$file" && ! -L "$file" ]]; then
+        mkdir -p "$HOME/.backup-dotfiles"
+        mv "$file" "$HOME/.backup-dotfiles/"
+        print_warning "Backed up $file"
+    fi
+}
+
+create_symlink() {
+    local source="$1"
+    local target="$2"
+
+    create_directory "$(dirname "$target")"
+
+    if [[ -L "$target" ]]; then
+        rm "$target"
+    fi
+
+    ln -sf "$source" "$target"
+
+    print_success "$(basename "$target") linked"
+}

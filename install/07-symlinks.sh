@@ -2,17 +2,32 @@
 
 set -e
 
-echo "🔗 Creating symlinks..."
+source "$(dirname "$0")/../scripts/utils.sh"
 
-DOTFILES="$HOME/Projects/personal/dotfiles"
+DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
+SYMLINKS_FILE="$DOTFILES/config/symlinks.conf"
 
-mkdir -p ~/.config/ghostty
-mkdir -p ~/.config/lazygit
+print_header "Creating symbolic links"
 
-ln -sf "$DOTFILES/config/zsh/zshrc" ~/.zshrc
-ln -sf "$DOTFILES/config/git/gitconfig" ~/.gitconfig
-ln -sf "$DOTFILES/config/tmux/tmux.conf" ~/.tmux.conf
+if [[ ! -f "$SYMLINKS_FILE" ]]; then
+    print_error "Symlinks file not found: $SYMLINKS_FILE"
+    exit 1
+fi
 
-ln -sf "$DOTFILES/config/starship/starship.toml" ~/.config/starship.toml
-ln -sf "$DOTFILES/config/ghostty/config" ~/.config/ghostty/config
-ln -sf "$DOTFILES/config/lazygit/config.yml" ~/.config/lazygit/config.yml
+while IFS='|' read -r source target; do
+
+    # Ignorar comentarios y líneas vacías
+    [[ -z "$source" ]] && continue
+    [[ "$source" =~ ^# ]] && continue
+
+    source="$DOTFILES/$source"
+    target="${target/#\~/$HOME}"
+
+    backup_file "$target"
+
+    create_symlink "$source" "$target"
+
+done < "$SYMLINKS_FILE"
+
+echo
+print_success "All symbolic links created."
