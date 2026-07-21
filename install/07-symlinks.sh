@@ -2,9 +2,9 @@
 
 set -e
 
-source "$(dirname "$0")/../scripts/utils.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../scripts/utils.sh"
 
-DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SYMLINKS_FILE="$DOTFILES/config/symlinks.conf"
 
 print_header "Creating symbolic links"
@@ -16,15 +16,20 @@ fi
 
 while IFS='|' read -r source target; do
 
-    # Ignorar comentarios y líneas vacías
     [[ -z "$source" ]] && continue
     [[ "$source" =~ ^# ]] && continue
 
     source="$DOTFILES/$source"
     target="${target/#\~/$HOME}"
 
-    backup_file "$target"
+    if [[ ! -e "$source" ]]; then
+        print_warning "Source not found: $source"
+        continue
+    fi
 
+    mkdir -p "$(dirname "$target")"
+
+    backup_file "$target"
     create_symlink "$source" "$target"
 
 done < "$SYMLINKS_FILE"
