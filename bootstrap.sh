@@ -4,15 +4,11 @@ set -e
 
 echo "🚀 Starting bootstrap..."
 
-./install/packages.sh
-./install/git.sh
-./install/node.sh
-./install/fonts.sh
-./install/ghostty.sh
-./install/tmux.sh
-./install/tmuxinator.sh
-./install/symlinks.sh
-./install/final.sh
+for script in install/*.sh; do
+    echo ""
+    echo "▶ Running $(basename "$script")"
+    bash "$script"
+done
 
 echo ""
 echo "🎉 Bootstrap completed successfully!"
