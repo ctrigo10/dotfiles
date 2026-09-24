@@ -10,7 +10,7 @@ Host github-personal
     IdentitiesOnly yes
 
 # GitHub PowerFinancialPr
-Host github
+Host github.com github
     HostName github.com
     User git
     IdentityFile ~/.ssh/id_ed25519_github_powerfinancial
