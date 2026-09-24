@@ -5,7 +5,7 @@ set -e
 source "$(dirname "${BASH_SOURCE[0]}")/../scripts/utils.sh"
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SYMLINKS_FILE="$DOTFILES/config/symlinks.conf"
+SYMLINKS_FILE="$DOTFILES/config/links.conf"
 
 print_header "Creating symbolic links"
 

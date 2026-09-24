@@ -53,25 +53,6 @@ require_sudo() {
   print_success "Privileges granted"
 }
 
-#######################################
-# Helpers
-#######################################
-
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
-
-package_installed() {
-    dpkg -s "$1" >/dev/null 2>&1
-}
-
-require_sudo() {
-    print_header "Requesting administrator privileges"
-
-    sudo -v
-
-    print_success "Privileges granted"
-}
 
 create_directory() {
     mkdir -p "$1"

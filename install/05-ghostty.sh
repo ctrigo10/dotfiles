@@ -13,6 +13,9 @@ fi
 
 require_sudo
 
-sudo apt install -y ghostty
-
-print_success "Ghostty installed successfully."
+if sudo apt install -y ghostty 2>/dev/null; then
+    print_success "Ghostty installed successfully."
+else
+    print_warning "Ghostty package not found in standard apt repositories."
+    print_warning "Please install Ghostty manually or add its official PPA/repository."
+fi
